@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7b6d2">
+  <meta name="description" content="Personal webpage 2025 – portfolio, projects, and contact">
+  <title>🌸 My 2025 Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="particles"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">✿</span>
+        <span class="brand-text"><span id="site-title">Marla</span></span>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+                 <ul id="nav-menu" class="nav-menu">
+           <li><a href="#about">About</a></li>
+           <li><a href="#skills">Skills</a></li>
+           <li><a href="#projects">Projects</a></li>
+           <li><a href="#featured-video">Featured Video</a></li>
+           <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#maps">Maps</a></li>
+            <li><a href="#contact">Contact</a></li>
+         </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+                     <h1 id="hero-title">Hi, I'm <span id="profile-name">Marla</span> <span class="sparkle">✨</span></h1>
+          <p id="hero-tagline">Creating cute, clever, and delightful digital things.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">See Projects</a>
+            <a class="btn btn-ghost" href="#contact">Say Hello</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="images/marla-avatar.jpg" alt="Profile portrait" loading="lazy" id="profile-avatar">
+        </div>
+      </div>
+      <div class="floating">
+        <span>♡</span><span>✿</span><span>★</span><span>♡</span><span>✿</span>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+                 <p id="about-bio">Hi! I'm Marla Mendoza, a passionate BSIT student at ACES Polytechnic College with a deep love for technology and innovation. I'm constantly exploring programming languages, web development, and emerging technologies to build solutions that can make a real impact. My journey in IT has taught me that every line of code is an opportunity to create something meaningful. When I'm not immersed in coding projects or studying, I love staying updated with the latest tech trends and collaborating with fellow developers to bring creative ideas to life.</p>
+        <div class="typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <ul id="skills-list" class="chips"></ul>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div id="projects-grid" class="grid">
+          <div class="project-card">
+            <a href="dana.html" class="project-link" target="_blank" rel="noopener">
+              <img src="images/Screenshot (1).png" alt="AI Chatbot Interface" class="project-image">
+            </a>
+            <div class="project-info">
+              <h3 class="project-title">AI Chatbot Interface</h3>
+              <p class="project-description">Interactive chat application built with Bootstrap, featuring a modern sidebar navigation and real-time messaging interface.</p>
+              <div class="project-tags">
+                <span class="tag">Bootstrap</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">UI/UX</span>
+              </div>
+              <a class="btn btn-small" href="dana.html" target="_blank" rel="noopener">View</a>
+            </div>
+          </div>
+          <div class="project-card">
+            <a href="bootsrap.html" class="project-link" target="_blank" rel="noopener">
+              <img src="images/Screenshot (3).png" alt="Class Schedule & Topics" class="project-image">
+            </a>
+            <div class="project-info">
+              <h3 class="project-title">Class Schedule & Topics</h3>
+              <p class="project-description">Educational management system with class scheduling, topic organization, and interactive content management features.</p>
+              <div class="project-tags">
+                <span class="tag">Bootstrap</span>
+                <span class="tag">HTML/CSS</span>
+                <span class="tag">Education</span>
+              </div>
+              <a class="btn btn-small" href="bootsrap.html" target="_blank" rel="noopener">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="gallery" class="section">
+      <div class="container">
+        <h2 class="section-title">Gallery</h2>
+        <div id="gallery-grid" class="portfolio-grid"></div>
+      </div>
+    </section>
+
+    <section id="maps" class="section">
+      <div class="container">
+        <h2 class="section-title">Location</h2>
+        <div class="maps-content">
+          <div class="map-card">
+            <div class="map-embed">
+              <iframe
+                id="gmap-embed"
+                title="Google Map"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=7.3117668,125.6757107&z=17&t=m&output=embed">
+              </iframe>
+            </div>
+            <div class="map-actions">
+              <div class="map-actions-left">
+                <button id="map-type-map" class="btn btn-small" aria-pressed="true">Map</button>
+                <button id="map-type-sat" class="btn btn-small btn-ghost">Satellite</button>
+                <button id="locate-me" class="btn btn-small">Use my location</button>
+              </div>
+              <div class="map-actions-right">
+                <a class="btn btn-small" href="https://www.google.com/maps?q=7.3117668,125.6757107" target="_blank" rel="noopener">Open in Google Maps</a>
+                <a class="btn btn-small btn-ghost" href="https://www.google.com/maps/dir/?api=1&destination=7.3117668,125.6757107" target="_blank" rel="noopener">Directions</a>
+              </div>
+            </div>
+            <div class="map-status"><span id="loc-status" class="text-muted"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="featured-video" class="featured-video-section">
+      <div class="container">
+        <h2 class="section-title">Featured Video</h2>
+        <div class="youtube-content">
+          <div class="youtube-info">
+            <h3 id="youtube-title">My Favorite Song</h3>
+            <p id="youtube-description">Check out this video I love listening to while coding and designing projects!</p>
+            <a id="youtube-link" class="youtube-btn" href="https://www.youtube.com/watch?v=J0_2cr5rPzI&list=RDJ0_2cr5rPzI" target="_blank" rel="noopener">
+              <span class="youtube-icon">📺</span> Watch on YouTube
+            </a>
+          </div>
+          <div class="youtube-preview">
+            <div class="youtube-player-container">
+              <div class="video-player-header">
+                <div class="video-profile">
+                  <div class="profile-pic">🎶</div>
+                  <span class="video-title">Now Playing</span>
+                </div>
+                <div class="share-button">
+                  <span class="share-icon">🔗</span>
+                  <span class="share-text">Share</span>
+                </div>
+              </div>
+              <video id="local-video" src="images/videoplayback.mp4" preload="metadata" playsinline></video>
+              <div class="video-controls">
+                <div class="control-left">
+                  <button class="control-btn">Play</button>
+                  <button class="control-btn">Pause</button>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill">
+                    <div class="progress-handle"></div>
+                  </div>
+                </div>
+                <div class="control-right">
+                  <span class="time-display">0:00 / 4:00</span>
+                  <span class="control-icon">⚙</span>
+                  <span class="control-icon">🔊</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+           
+
+    <section id="contact" class="section">
+      <div class="container contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p>📧 Email: <a id="contact-email" href="mailto:me@example.com">mendozamarladana@gmail.com</a></p>
+            <p>📍 Location: <span id="contact-location">Earth</span></p>
+            <p>💼 <span id="contact-availability">Open to work</span></p>
+          </div>
+          <div class="contact-info">
+            <h3>Connect With Me</h3>
+            <ul id="social-links" class="socials"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+             <p>© <span id="year"></span> <span id="footer-name">Marla</span>. Made with <span class="heart">❤</span></p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var toggle = document.querySelector('.nav-toggle');
+      var menu = document.getElementById('nav-menu');
+      if (toggle && menu) {
+        toggle.addEventListener('click', function() {
+          var expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', String(!expanded));
+          menu.classList.toggle('open');
+        });
+      }
+    })();
+
+    (function() {
+      var yearEl = document.getElementById('year');
+      yearEl.textContent = new Date().getFullYear();
+
+      fetch('data.json', { cache: 'no-store' })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (!data) return;
+
+          // Site title/tagline now static in HTML; data.site no longer used
+
+          // Inline defaults; profile data no longer loaded from data.json
+          document.getElementById('profile-name').textContent = 'Marla';
+          document.getElementById('footer-name').textContent = 'Marla';
+
+          // Inline skills (removed from data.json)
+          var skillsList = document.getElementById('skills-list');
+          ['HTML/CSS','JavaScript','Responsive Design','UI/UX Design','Git & GitHub']
+            .forEach(function(skill, index){
+              var li = document.createElement('li');
+              li.className = 'chip';
+              li.textContent = skill;
+              li.style.animationDelay = (index * 0.1) + 's';
+              skillsList.appendChild(li);
+            });
+
+          var projectsGrid = document.getElementById('projects-grid');
+          if (Array.isArray(data.projects)) {
+            data.projects.forEach(function(project, index) {
+              var card = document.createElement('article');
+              card.className = 'card';
+              card.style.animationDelay = (index * 0.2) + 's';
+              var html = '' +
+                '<div class="card-media">' +
+                  (project.image ? '<img src="' + project.image + '" alt="' + (project.name || 'Project') + ' image" loading="lazy">' : '') +
+                '</div>' +
+                '<div class="card-body">' +
+                  '<h3>' + (project.name || 'Project') + '</h3>' +
+                  (project.desc ? '<p>' + project.desc + '</p>' : '') +
+                  (Array.isArray(project.tags) ? '<ul class="chips small">' + project.tags.map(function(t){return '<li class="chip">' + t + '</li>';}).join('') + '</ul>' : '') +
+                  (project.link ? '<a class="btn btn-small" href="' + project.link + '" target="_blank" rel="noopener">View</a>' : '') +
+                '</div>';
+              card.innerHTML = html;
+              projectsGrid.appendChild(card);
+            });
+          }
+
+          // Inline gallery images (removed from data.json)
+          var galleryGrid = document.getElementById('gallery-grid');
+          ['images/gallery1.jpeg','images/gallery2.jpeg','images/gallery3.jpeg'].forEach(function(src, index){
+            var fig = document.createElement('figure');
+            fig.className = 'gallery-item';
+            fig.style.animationDelay = (index * 0.15) + 's';
+            fig.innerHTML = '<img src="' + src + '" alt="Gallery image" loading="lazy">';
+            fig.addEventListener('click', function(){ openGalleryView(src, index, ['images/gallery1.jpeg','images/gallery2.jpeg','images/gallery3.jpeg']); });
+            galleryGrid.appendChild(fig);
+          });
+
+                     if (data.contact) {
+             if (data.contact.email) {
+               var emailEl = document.getElementById('contact-email');
+               emailEl.textContent = data.contact.email;
+               emailEl.href = 'mailto:' + data.contact.email;
+             }
+             if (data.contact.location) {
+               document.getElementById('contact-location').textContent = data.contact.location;
+             }
+             if (data.contact.availability) {
+               document.getElementById('contact-availability').textContent = data.contact.availability;
+             }
+           }
+
+           if (data.youtube) {
+             if (data.youtube.title) {
+               document.getElementById('youtube-title').textContent = data.youtube.title;
+             }
+             if (data.youtube.description) {
+               document.getElementById('youtube-description').textContent = data.youtube.description;
+             }
+             if (data.youtube.url) {
+               document.getElementById('youtube-link').href = data.youtube.url;
+             }
+           }
+
+          var socialsList = document.getElementById('social-links');
+          [
+            { name: 'Instagram', url: 'https://www.instagram.com/mhaarla?igsh=MTR5NXRwanRieXZs&utm_source=qr' },
+            { name: 'Facebook', url: 'https://www.facebook.com/share/1EWWaiU9wD/?mibextid=wwXIfr' },
+            { name: 'TikTok', url: 'https://www.tiktok.com/@marla0121?_t=ZS-8z5MEVT3Ssr&_r=1' }
+          ].forEach(function(s, index){
+            var li = document.createElement('li');
+            li.style.animationDelay = (index * 0.1) + 's';
+            var icon = getSocialIcon(s.name);
+            li.innerHTML = '<a href="' + s.url + '" target="_blank" rel="noopener">' + icon + ' ' + s.name + '</a>';
+            socialsList.appendChild(li);
+          });
+          
+          function getSocialIcon(platform) {
+            const icons = {
+              'Instagram': '📸',
+              'Facebook': '📘',
+              'TikTok': '🎵',
+              'Twitter': '🐦',
+              'LinkedIn': '💼',
+              'GitHub': '💻',
+              'YouTube': '📺',
+              'Discord': '🎮'
+            };
+            return icons[platform] || '🔗';
+          }
+        })
+        .catch(function(err) {
+          console.warn('Failed loading data.json', err);
+        });
+    })();
+
+    (function() {
+      const particles = document.querySelector('.particles');
+      
+      document.addEventListener('mousemove', (e) => {
+        if (Math.random() > 0.85) {
+          createParticle(e.clientX, e.clientY);
+        }
+      });
+      
+      
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          const x = Math.random() * window.innerWidth;
+          const y = -50;
+          createParticle(x, y);
+        }
+      }, 300);
+
+      function createParticle(x, y) {
+        const emojis = ['✨', '💫', '⭐', '🌟', '💎', '🌸', '🌺', '🌼', '🌻', '🌷', '🌹', '🍀', '🎀', '🎈', '🎉', '🎊', '💖', '💕', '💗', '💓', '💝', '💞', '💟', '💌', '💋', '💍', '💎', '🔮', '🎭', '🎪', '🎨', '🎬', '🎤', '🎧', '🎵', '🎶', '🎹', '🎸', '🎺', '🎻', '🎷', '🎺', '🎸', '🎻', '🎷', '🎺', '🎸', '🎻', '🎷'];
+        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+        
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.textContent = randomEmoji;
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particles.appendChild(particle);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 2000);
+      }
+
+      const sparkle = document.querySelector('.sparkle');
+      sparkle.addEventListener('mouseenter', () => {
+        sparkle.style.animation = 'sparkle 0.6s ease-in-out';
+      });
+
+      sparkle.addEventListener('animationend', () => {
+        sparkle.style.animation = '';
+      });
+
+      const heart = document.querySelector('.heart');
+      heart.addEventListener('click', () => {
+        heart.style.animation = 'heartbeat 0.6s ease-in-out';
+      });
+
+      heart.addEventListener('animationend', () => {
+        heart.style.animation = '';
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.section-title, .chip, .card, .gallery-item, .socials li').forEach(el => {
+        observer.observe(el);
+      });
+
+      let currentTheme = 'light';
+      const body = document.body;
+      
+      function toggleTheme() {
+        currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+        body.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
+      }
+
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        currentTheme = savedTheme;
+        body.setAttribute('data-theme', currentTheme);
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 't' && e.ctrlKey) {
+          toggleTheme();
+        }
+      });
+
+      const typingIndicator = document.querySelector('.typing-indicator');
+      let typingIndex = 0;
+      
+      function animateTyping() {
+        const dots = typingIndicator.querySelectorAll('span');
+        dots[typingIndex].classList.add('typing');
+        
+        setTimeout(() => {
+          dots[typingIndex].classList.remove('typing');
+          typingIndex = (typingIndex + 1) % dots.length;
+        }, 500);
+      }
+
+             setInterval(animateTyping, 1500);
+     })();
+     
+    
+     function openGalleryView(src, index, galleryArray) {
+       
+       const modal = document.createElement('div');
+       modal.className = 'gallery-modal';
+       modal.innerHTML = `
+         <div class="gallery-modal-content">
+           <button class="gallery-close-btn">×</button>
+           <div class="gallery-navigation">
+             <button class="gallery-nav-btn gallery-prev-btn" ${index === 0 ? 'disabled' : ''}>‹</button>
+             <button class="gallery-nav-btn gallery-next-btn" ${index === galleryArray.length - 1 ? 'disabled' : ''}>›</button>
+           </div>
+           <div class="gallery-image-container">
+             <img src="${src}" alt="Gallery image" class="gallery-modal-image">
+           </div>
+           <div class="gallery-info">
+             <span class="gallery-counter">${index + 1} of ${galleryArray.length}</span>
+           </div>
+         </div>
+       `;
+       
+       document.body.appendChild(modal);
+       
+       
+       const closeBtn = modal.querySelector('.gallery-close-btn');
+       closeBtn.addEventListener('click', () => {
+         modal.remove();
+       });
+       
+       
+       modal.addEventListener('click', (e) => {
+         if (e.target === modal) {
+           modal.remove();
+         }
+       });
+       
+
+       const prevBtn = modal.querySelector('.gallery-prev-btn');
+       const nextBtn = modal.querySelector('.gallery-nav-btn');
+       const image = modal.querySelector('.gallery-modal-image');
+       const counter = modal.querySelector('.gallery-counter');
+       
+       prevBtn.addEventListener('click', () => {
+         if (index > 0) {
+           index--;
+           image.src = galleryArray[index];
+           counter.textContent = (index + 1) + ' of ' + galleryArray.length;
+           prevBtn.disabled = index === 0;
+           nextBtn.disabled = false;
+         }
+       });
+       
+       nextBtn.addEventListener('click', () => {
+         if (index < galleryArray.length - 1) {
+           index++;
+           image.src = galleryArray[index];
+           counter.textContent = (index + 1) + ' of ' + galleryArray.length;
+           nextBtn.disabled = index === galleryArray.length - 1;
+           prevBtn.disabled = false;
+         }
+       });
+       
+
+       document.addEventListener('keydown', function handleKeydown(e) {
+         if (e.key === 'Escape') {
+           modal.remove();
+           document.removeEventListener('keydown', handleKeydown);
+         } else if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
+           prevBtn.click();
+         } else if (e.key === 'ArrowRight' && !nextBtn.disabled) {
+           nextBtn.click();
+         }
+       });
+       
+
+       setTimeout(() => modal.classList.add('show'), 10);
+     }
+   </script>
+
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  let player;
+
+
+  function onYouTubeIframeAPIReady() {
+    // If we replaced the iframe with a local <video>, wire local controls and skip YT
+    if (!document.getElementById('youtube-player')) {
+      setupLocalVideoControls();
+      return;
+    }
+
+    // Append origin param for better compatibility
+    var iframe = document.getElementById('youtube-player');
+    if (iframe) {
+      try {
+        var url = new URL(iframe.src);
+        if (!url.searchParams.get('origin')) {
+          url.searchParams.set('origin', window.location.origin);
+          iframe.src = url.toString();
+        }
+      } catch (e) {}
+    }
+
+    player = new YT.Player('youtube-player', {
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange,
+        'onError': onPlayerError
+      }
+    });
+  }
+
+  function setupLocalVideoControls() {
+    const video = document.getElementById('local-video');
+    if (!video) return;
+    const playBtn = document.querySelector('.control-btn:nth-child(1)');
+    const pauseBtn = document.querySelector('.control-btn:nth-child(2)');
+    const volumeBtn = document.querySelector('.control-icon:nth-child(3)');
+    const progressBar = document.querySelector('.progress-bar');
+    const progressFill = document.querySelector('.progress-fill');
+    const timeDisplay = document.querySelector('.time-display');
+
+    playBtn && playBtn.addEventListener('click', function(){ video.play(); });
+    pauseBtn && pauseBtn.addEventListener('click', function(){ video.pause(); });
+
+    volumeBtn && volumeBtn.addEventListener('click', function(){
+      video.muted = !video.muted;
+      volumeBtn.textContent = video.muted ? '🔇' : '🔊';
+    });
+
+    progressBar && progressBar.addEventListener('click', function(e){
+      const barWidth = progressBar.offsetWidth;
+      const clickX = e.offsetX;
+      const duration = video.duration || 0;
+      if (!duration) return;
+      const newTime = (clickX / barWidth) * duration;
+      video.currentTime = newTime;
+    });
+
+    video.addEventListener('timeupdate', function(){
+      const duration = video.duration || 0;
+      if (!duration) return;
+      const current = video.currentTime || 0;
+      const percent = (current / duration) * 100;
+      if (progressFill) progressFill.style.width = percent + '%';
+      if (timeDisplay) timeDisplay.textContent = formatTime(current) + ' / ' + formatTime(duration);
+    });
+  }
+
+  function onPlayerReady(event) {
+    const playBtn = document.querySelector('.control-btn:nth-child(1)');
+    const pauseBtn = document.querySelector('.control-btn:nth-child(2)');
+    const volumeBtn = document.querySelector('.control-icon:nth-child(3)');
+    const progressBar = document.querySelector('.progress-bar');
+    const progressFill = document.querySelector('.progress-fill');
+    const timeDisplay = document.querySelector('.time-display');
+
+    // If using local video, YT controls are handled elsewhere
+    if (!document.getElementById('youtube-player')) return;
+    playBtn.addEventListener('click', () => {
+      player.playVideo();
+    });
+
+
+    pauseBtn.addEventListener('click', () => {
+      player.pauseVideo();
+    });
+
+
+    volumeBtn.addEventListener('click', () => {
+      const currentVolume = player.getVolume();
+      if (currentVolume > 0) {
+        player.setVolume(0);
+        volumeBtn.textContent = '🔇';
+      } else {
+        player.setVolume(100);
+        volumeBtn.textContent = '🔊';
+      }
+    });
+
+    progressBar.addEventListener('click', (e) => {
+      const barWidth = progressBar.offsetWidth;
+      const clickX = e.offsetX;
+      const duration = player.getDuration();
+      const newTime = (clickX / barWidth) * duration;
+      player.seekTo(newTime, true);
+    });
+
+
+    setInterval(() => {
+      if (player && player.getDuration) {
+        const current = player.getCurrentTime();
+        const duration = player.getDuration();
+        const percent = (current / duration) * 100;
+
+        progressFill.style.width = percent + '%';
+        timeDisplay.textContent = formatTime(current) + ' / ' + formatTime(duration);
+      }
+    }, 1000);
+  }
+
+  function onPlayerStateChange(event) {
+
+  }
+
+  function onPlayerError(event) {
+    try {
+      var iframe = document.getElementById('youtube-player');
+      if (!iframe) return;
+
+      var container = iframe.parentElement; // .youtube-player-container
+      var watchLink = document.getElementById('youtube-link');
+      var href = watchLink && watchLink.href ? watchLink.href : 'https://www.youtube.com/watch?v=kLUjbBkahCE';
+
+      // Try to get video id from current iframe src
+      var src = iframe.getAttribute('src') || '';
+      var match = src.match(/embed\/([a-zA-Z0-9_-]{6,})/);
+      var vid = match ? match[1] : 'kLUjbBkahCE';
+
+      var fallback = document.createElement('a');
+      fallback.className = 'youtube-fallback';
+      fallback.href = href;
+      fallback.target = '_blank';
+      fallback.rel = 'noopener';
+      fallback.innerHTML = '<img alt="Open on YouTube" style="width:100%;height:320px;object-fit:cover;border:0;display:block" src="https://img.youtube.com/vi/' + vid + '/hqdefault.jpg">' +
+                           '<div style="padding:1rem;text-align:center;background:#111;color:#fff">Video cannot be embedded. Click to watch on YouTube</div>';
+
+      container.replaceChild(fallback, iframe);
+    } catch (e) {
+      // no-op
+    }
+  }
+
+  function formatTime(sec) {
+    const minutes = Math.floor(sec / 60);
+    const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  }
+  // Pin my location for Google Maps embed (no API key)
+  (function(){
+    const btn = document.getElementById('locate-me');
+    const iframe = document.getElementById('gmap-embed');
+    const statusEl = document.getElementById('loc-status');
+    const btnMap = document.getElementById('map-type-map');
+    const btnSat = document.getElementById('map-type-sat');
+    let currentType = 'm'; // m: map, k: satellite
+    let currentZoom = 17;
+    let lat = 7.3117668, lng = 125.6757107;
+    if (!btn || !iframe) return;
+    btn.addEventListener('click', function(){
+      if (!navigator.geolocation) { statusEl.textContent = 'Geolocation not supported.'; return; }
+      statusEl.textContent = 'Locating…';
+      navigator.geolocation.getCurrentPosition(function(pos){
+        lat = pos.coords.latitude; lng = pos.coords.longitude; currentZoom = 17;
+        iframe.src = `https://www.google.com/maps?q=${lat},${lng}&z=${currentZoom}&t=${currentType}&output=embed`;
+        statusEl.textContent = 'Location pinned.';
+      }, function(err){
+        statusEl.textContent = 'Location error: ' + err.message;
+      }, { enableHighAccuracy: true, timeout: 20000 });
+    });
+
+    function setType(type){
+      currentType = type;
+      iframe.src = `https://www.google.com/maps?q=${lat},${lng}&z=${currentZoom}&t=${currentType}&output=embed`;
+      if (btnMap) btnMap.setAttribute('aria-pressed', String(type==='m'));
+      if (btnSat) btnSat.setAttribute('aria-pressed', String(type==='k'));
+    }
+    btnMap && btnMap.addEventListener('click', function(){ setType('m'); });
+    btnSat && btnSat.addEventListener('click', function(){ setType('k'); });
+  })();
+</script>
+ </body>
+ </html>
+

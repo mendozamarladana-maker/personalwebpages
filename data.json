@@ -1,0 +1,54 @@
+{
+  "site": {
+    "title": " Marla Mendoza - BSIT Portfolio",
+    "tagline": "Passionate BSIT student creating innovative digital solutions"
+  },
+  "profile": {
+    "name": "Marla Mendoza",
+    "avatar": "images/marla-avatar.jpg",
+    "bio": "Hi! I'm Marla Mendoza, a passionate BSIT student at ACES Polytechnic College with a deep love for technology and innovation. I'm constantly exploring programming languages, web development, and emerging technologies to build solutions that can make a real impact. My journey in IT has taught me that every line of code is an opportunity to create something meaningful. When I'm not immersed in coding projects or studying, I love staying updated with the latest tech trends and collaborating with fellow developers to bring creative ideas to life."
+  },
+  "skills": [
+    "HTML/CSS",
+    "JavaScript",
+    "React.js",
+    "Node.js",
+    "Python",
+    "Database Design",
+    "Web Development",
+    "UI/UX Design",
+    "Git & GitHub",
+    "Responsive Design"
+  ],
+  "projects": [
+    {
+      "name": "Personal Portfolio Website",
+      "desc": "A modern, responsive portfolio website built with HTML, CSS, and JavaScript. Features smooth animations, dark mode toggle, and mobile-first design.",
+      "tags": ["HTML", "CSS", "JavaScript", "Responsive Design"],
+      "image": "images/personalwebpage.png",
+      "link": "index.html"
+    }
+  ],
+  "gallery": [
+    "images/gallery1.jpeg",
+    "images/gallery2.jpeg",
+    "images/gallery3.jpeg"
+  ],
+  "youtube": {
+    "title": "SAJKA - Nicotine (Official Music Video)",
+    "description": "Watch on YouTube",
+    "url": "https://www.youtube.com/watch?v=ihWuYDOdmZs&list=RDihWuYDOdmZs"
+  },
+  "contact": {
+    "email": "marlamendoza0121@gmail.com",
+    "location": "Philippines",
+    "availability": "Open to internships and collaborative projects"
+  },
+  "socials": [
+    { "name": "Instagram", "url": "https://www.instagram.com/mhaarla?igsh=MTR5NXRwanRieXZs&utm_source=qr" },
+    { "name": "Facebook", "url": "https://www.facebook.com/share/1EWWaiU9wD/?mibextid=wwXIfr" },
+    { "name": "TikTok", "url": "https://www.tiktok.com/@marla0121?_t=ZS-8z5MEVT3Ssr&_r=1" }
+  ]
+}
+
+

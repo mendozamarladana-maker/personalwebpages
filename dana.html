@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Chatbot Interface - Marla Mendoza</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --sidebar-width: 280px;
+      --accent: #0d6efd;
+      --bg: #f8f9fa;
+    }
+    body { background: var(--bg); height:100vh; overflow:hidden; }
+    .app { display: flex; height:100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      border-right: 1px solid rgba(0,0,0,.06);
+      background: #fff;
+      display:flex;
+      flex-direction:column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      z-index: 1050;
+      transform: translateX(-100%);
+      transition: transform .3s ease;
+    }
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar .brand { padding: 1rem; font-weight:700; }
+    .conversation-list { padding: .5rem 1rem 1rem 1rem; flex:1; overflow:auto; }
+    .conversation-item { cursor: pointer; padding:.5rem; border-radius:.5rem; }
+    .conversation-item:hover { background: rgba(13,110,253,.06); }
+
+    .sidebar-footer {
+      border-top: 1px solid rgba(0,0,0,.06);
+      padding: .75rem 1rem;
+      background:#fff;
+    }
+    .profile {
+      display:flex;
+      align-items:center;
+      cursor:pointer;
+    }
+    .profile img{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      margin-right:.75rem;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.4);
+      display: none;
+      z-index: 1040;
+    }
+    .overlay.show {
+      display: block;
+    }
+
+    /* Main content */
+    .main {
+      flex:1; display:flex; flex-direction:column;
+      margin-left: 0; /* not pushing content, overlay instead */
+      transition: margin-left .3s ease;
+      width:100%;
+    }
+    .chat-header { padding: .75rem 1rem; border-bottom: 1px solid rgba(0,0,0,.06); background: #fff; }
+    .messages { flex:1; padding: 1rem; overflow:auto; }
+    .message { max-width:72%; padding:.6rem .8rem; margin-bottom:.6rem; border-radius: .6rem; display:inline-block; }
+    .user { background: #0d6efd; color:#fff; align-self:flex-end; border-bottom-right-radius:0; }
+    .assistant { background:#e9ecef; color:#000; border-bottom-left-radius:0; }
+
+    .composer { padding: .75rem; border-top:1px solid rgba(0,0,0,.06); background:#fff; }
+    .composer .input-group textarea { resize: none; height:56px; }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+<aside id="sidebar" class="sidebar">
+    <div class="brand d-flex align-items-center">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'><rect width='100%' height='100%' rx='6' fill='%230d6efd'/><text x='50%' y='55%' font-size='12' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'>AI</text></svg>"
+           alt="logo" class="me-2">
+      <div>
+        <div>AI Chatbot Interface</div>
+        <small class="text-muted">Interactive Chat Demo</small>
+      </div>
+    </div>
+  
+    <!-- New Chat -->
+    <div class="p-2">
+      <button class="btn btn-primary w-100">+ New Chat</button>
+    </div>
+  
+    <!-- Conversation list -->
+    <!-- Conversation list -->
+<div class="conversation-list">
+  <small class="text-muted d-block mb-2">Pinned</small>
+
+  <!-- Project Ideas with collapsible content -->
+  <div class="conversation-item">
+    <a class="d-flex align-items-start text-decoration-none text-dark" data-bs-toggle="collapse" href="#projectIdeas" role="button">
+      <div class="flex-grow-1">
+        <div class="fw-semibold">Project Ideas</div>
+        <div class="text-muted small">AI suggestions</div>
+      </div>
+    </a>
+    <div class="collapse mt-2 ps-3" id="projectIdeas">
+      <ul class="list-unstyled small mb-0">
+        <li>🤖 AI Chatbot</li>
+        <li>📱 Mobile App</li>
+        <li>🌐 Portfolio Website</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Daily Journal with collapsible content -->
+  <div class="conversation-item">
+    <a class="d-flex align-items-start text-decoration-none text-dark" data-bs-toggle="collapse" href="#dailyJournal" role="button">
+      <div class="flex-grow-1">
+        <div class="fw-semibold">Daily Journal</div>
+        <div class="text-muted small">Personal notes</div>
+      </div>
+    </a>
+    <div class="collapse mt-2 ps-3" id="dailyJournal">
+      <ul class="list-unstyled small mb-0">
+        <li>🌅 Morning thoughts</li>
+        <li>📝 To-do list</li>
+        <li>🌙 Evening reflection</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="my-2">
+
+  <small class="text-muted d-block mb-2">Recent</small>
+  <div class="conversation-item d-flex align-items-start">
+    <div class="flex-grow-1">
+      <div class="fw-semibold">Math Homework</div>
+      <div class="text-muted small">Equation help</div>
+    </div>
+    <div class="text-muted small">2h</div>
+  </div>
+
+  <div class="conversation-item d-flex align-items-start">
+    <div class="flex-grow-1">
+      <div class="fw-semibold">Recipe Ideas</div>
+      <div class="text-muted small">Quick meals</div>
+    </div>
+    <div class="text-muted small">5h</div>
+  </div>
+
+  <div class="conversation-item d-flex align-items-start">
+    <div class="flex-grow-1">
+      <div class="fw-semibold">Workout Plan</div>
+      <div class="text-muted small">Fitness tips</div>
+    </div>
+    <div class="text-muted small">1d</div>
+  </div>
+</div>
+
+  
+    <!-- Footer Profile -->
+    <div class="sidebar-footer">
+      <div class="dropdown">
+        <div class="profile dropdown-toggle" data-bs-toggle="dropdown">
+          <img src="me.jpg" alt="Profile">
+          <div>
+            <div class="fw-semibold">MARLA MENDOZA</div>
+            <small class="text-muted">Online</small>
+          </div>
+        </div>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+  
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="chat-header d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <button id="toggleSidebar" class="btn btn-sm btn-outline-secondary me-2">☰</button>
+        <div>
+          <div class="fw-bold">AI Assistant</div>
+          <div class="small text-muted">Ready to help with your questions</div>
+        </div>
+        </div>
+        <div>
+          <button id="clearBtn" class="btn btn-sm btn-outline-secondary">Clear</button>
+        </div>
+      </div>
+
+      <div id="messages" class="messages d-flex flex-column">
+        <!-- messages inserted here -->
+      </div>
+
+      <div class="composer">
+        <div class="input-group">
+          <textarea id="prompt" class="form-control" placeholder="Type your message and press Enter"></textarea>
+          <button id="sendBtn" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const messagesEl = document.getElementById('messages');
+    const promptEl = document.getElementById('prompt');
+    const sendBtn = document.getElementById('sendBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const sidebar = document.getElementById('sidebar');
+    const toggleSidebar = document.getElementById('toggleSidebar');
+    const overlay = document.getElementById('overlay');
+
+    function appendMessage(text, who){
+      const div = document.createElement('div');
+      div.className = 'message ' + (who === 'user' ? 'user ms-auto' : 'assistant');
+      div.textContent = text;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function mockAssistantReply(userText){
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('Assistant (simulated): ' + userText.split('').reverse().join(''));
+        }, 800);
+      });
+    }
+
+    async function sendMessage(){
+      const text = promptEl.value.trim();
+      if(!text) return;
+      appendMessage(text, 'user');
+      promptEl.value = '';
+      sendBtn.disabled = true;
+
+      const typing = document.createElement('div');
+      typing.className = 'message assistant';
+      typing.textContent = '...';
+      messagesEl.appendChild(typing);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+
+      try{
+        const reply = await mockAssistantReply(text);
+        typing.remove();
+        appendMessage(reply, 'assistant');
+      }catch(e){
+        typing.textContent = 'Error: ' + e.message;
+      }finally{
+        sendBtn.disabled = false;
+      }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    promptEl.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' && !e.shiftKey){
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    clearBtn.addEventListener('click', () => {
+      messagesEl.innerHTML = '';
+    });
+
+    // Sidebar toggle
+    function openSidebar(){
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+    }
+    function closeSidebar(){
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+    }
+
+    toggleSidebar.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
+  </script>
+</body>
+</html>
