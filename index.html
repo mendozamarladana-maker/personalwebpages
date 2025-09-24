@@ -1,594 +1,312 @@
-<!doctype html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7b6d2">
-  <meta name="description" content="Personal webpage 2025 – portfolio, projects, and contact">
-  <title>My 2025 Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login, Sign Up & Calculator (LUDSM)</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Live animated gradient background */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(270deg, #ec49c9, #d447b6, #6a11cb, #2575fc);
+      background-size: 800% 800%;
+      animation: gradientMove 15s ease infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      width: 320px;
+      backdrop-filter: blur(15px);
+    }
+
+    .hidden { display: none; }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #92125d;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover { background-color: #0056cc; }
+
+    .error {
+      color: yellow;
+      font-size: 14px;
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    .link {
+      margin-top: 10px;
+      text-align: center;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .calculator input {
+      grid-column: span 4;
+      padding: 10px;
+      font-size: 20px;
+      text-align: right;
+      height: 50px;
+      border: none;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    .calculator button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background-color: #f18cf1a9;
+      cursor: pointer;
+    }
+
+    .calculator button:hover {
+      background-color: #e90ade;
+      color: #fff;
+    }
+
+    .calculator .equals {
+      background-color: #e100ff;
+      color: #fff;
+    }
+
+    .calculator .equals:hover { background-color: #b40588; }
+  </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- Sign Up Form -->
+  <div class="container" id="signup-container">
+    <h2>Sign Up</h2>
+    <input type="text" id="new-username" placeholder="Create Username" required />
+    <input type="password" id="new-password" placeholder="Create Password (min 8 chars)" required />
+    <div class="error" id="signup-error"></div>
+    <button onclick="signUp()">Sign Up</button>
+    <div class="link" onclick="showLogin()">Already have an account? Login</div>
+  </div>
 
-  <div class="particles"></div>
+  <!-- Login Form -->
+  <div class="container hidden" id="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <div class="error" id="login-error"></div>
+    <button onclick="login()">Login</button>
+    <div class="link" onclick="showSignup()">Don't have an account? Sign Up</div>
+  </div>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <span class="logo" aria-hidden="true">✿</span>
-        <span class="brand-text"><span id="site-title">My 2025</span></span>
-      </div>
-      <nav class="site-nav" aria-label="Primary">
-        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">Menu</button>
-                 <ul id="nav-menu" class="nav-menu">
-           <li><a href="#about">About</a></li>
-           <li><a href="#skills">Skills</a></li>
-           <li><a href="#projects">Projects</a></li>
-                       <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#maps">Maps</a></li>
-            <li><a href="#contact">Contact</a></li>
-         </ul>
-      </nav>
+  <!-- User Management (Update/Delete) -->
+  <div class="container hidden" id="manage-container">
+    <h2>Manage Account</h2>
+    <button onclick="showUpdate()">Update Password</button>
+    <button onclick="deleteAccount()">Delete Account</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Update Password -->
+  <div class="container hidden" id="update-container">
+    <h2>Update Password</h2>
+    <input type="password" id="update-password" placeholder="New Password (min 8 chars)" required />
+    <div class="error" id="update-error"></div>
+    <button onclick="updatePassword()">Update</button>
+    <button onclick="cancelUpdate()">Cancel</button>
+  </div>
+
+  <!-- Calculator -->
+  <div class="container hidden" id="calculator-container">
+    <h2>Calculator</h2>
+    <div class="calculator">
+      <input type="text" id="display" disabled />
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="backspace()">⌫</button>
+      <button onclick="appendValue('/')">/</button>
+      <button onclick="appendValue('*')">*</button>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('-')">-</button>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('+')">+</button>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button class="equals" onclick="calculate()">=</button>
+      <button onclick="appendValue('0')">0</button>
+      <button onclick="appendValue('.')">.</button>
+      <button onclick="clearDisplay()">C</button>
     </div>
-  </header>
-
-  <main id="main">
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-                     <h1 id="hero-title">Hi, I'm <span id="profile-name">Marla</span> <span class="sparkle">✨</span></h1>
-          <p id="hero-tagline">Creating cute, clever, and delightful digital things.</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#projects">See Projects</a>
-            <a class="btn btn-ghost" href="#contact">Say Hello</a>
-          </div>
-        </div>
-        <div class="hero-media">
-          <img id="profile-avatar" src="https://placehold.co/400x400.png?text=Avatar" alt="Profile portrait" loading="lazy">
-        </div>
-      </div>
-      <div class="floating">
-        <span>♡</span><span>✿</span><span>★</span><span>♡</span><span>✿</span>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <h2 class="section-title">About</h2>
-                 <p id="about-bio">Hi! I'm Marla Mendoza, a passionate BSIT student at ACES Polytechnic College with a deep love for technology and innovation. I'm constantly exploring programming languages, web development, and emerging technologies to build solutions that can make a real impact. My journey in IT has taught me that every line of code is an opportunity to create something meaningful. When I'm not immersed in coding projects or studying, I love staying updated with the latest tech trends and collaborating with fellow developers to bring creative ideas to life.</p>
-        <div class="typing-indicator">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" class="section">
-      <div class="container">
-        <h2 class="section-title">Skills</h2>
-        <ul id="skills-list" class="chips"></ul>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div id="projects-grid" class="grid"></div>
-      </div>
-    </section>
-
-    <section id="gallery" class="section">
-      <div class="container">
-        <h2 class="section-title">Gallery</h2>
-        <div id="gallery-grid" class="grid grid-gallery"></div>
-      </div>
-    </section>
-
-    <section id="maps" class="section">
-      <div class="container">
-        <h2 class="section-title">Maps</h2>
-        <div class="maps-content">
-          <img src="images/maps.png" alt="Maps visualization" loading="lazy" class="maps-image">
-        </div>
-      </div>
-    </section>
-
-    
-    <section id="featured-video" class="featured-video-section">
-      <div class="container">
-        <h2 class="section-title">Featured Video</h2>
-        <div class="youtube-content">
-          <div class="youtube-info">
-            <h3 id="youtube-title">My Favorite Song</h3>
-            <p id="youtube-description">Check out this video I love listening to while coding and designing projects!</p>
-            <a id="youtube-link" class="youtube-btn" href="#" target="_blank" rel="noopener">
-              <span class="youtube-icon">📺</span> Watch on YouTube
-            </a>
-          </div>
-          <div class="youtube-preview">
-            <div class="youtube-player-container">
-              <div class="video-player-header">
-                <div class="video-profile">
-                  <div class="profile-pic">🎶</div>
-                  <span class="video-title">Now Playing</span>
-                </div>
-                <div class="share-button">
-                  <span class="share-icon">🔗</span>
-                  <span class="share-text">Share</span>
-                </div>
-              </div>
-              <iframe id="youtube-player"
-              src="https://www.youtube.com/embed/kTpRG97JYIs?enablejsapi=1"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen>
-            </iframe>
-              <div class="video-controls">
-                <div class="control-left">
-                  <button class="control-btn">Play</button>
-                  <button class="control-btn">Pause</button>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill">
-                    <div class="progress-handle"></div>
-                  </div>
-                </div>
-                <div class="control-right">
-                  <span class="time-display">0:00 / 4:00</span>
-                  <span class="control-icon">⚙</span>
-                  <span class="control-icon">🔊</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-           
-
-    <section id="contact" class="section">
-      <div class="container contact">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-grid">
-          <div class="contact-info">
-            <p>📧 Email: <a id="contact-email" href="mailto:me@example.com">me@example.com</a></p>
-            <p>📍 Location: <span id="contact-location">Earth</span></p>
-            <p>💼 <span id="contact-availability">Open to work</span></p>
-          </div>
-          <div class="contact-info">
-            <h3>Connect With Me</h3>
-            <ul id="social-links" class="socials"></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-             <p>© <span id="year"></span> <span id="footer-name">Marla</span>. Made with <span class="heart">❤</span></p>
-    </div>
-  </footer>
+    <button onclick="showManage()">Manage Account</button>
+  </div>
 
   <script>
-    (function() {
-      var toggle = document.querySelector('.nav-toggle');
-      var menu = document.getElementById('nav-menu');
-      if (toggle && menu) {
-        toggle.addEventListener('click', function() {
-          var expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', String(!expanded));
-          menu.classList.toggle('open');
-        });
+    // Show/Hide Forms
+    function showSignup() {
+      document.getElementById("login-container").classList.add("hidden");
+      document.getElementById("signup-container").classList.remove("hidden");
+    }
+    function showLogin() {
+      document.getElementById("signup-container").classList.add("hidden");
+      document.getElementById("login-container").classList.remove("hidden");
+    }
+    function showManage() {
+      document.getElementById("calculator-container").classList.add("hidden");
+      document.getElementById("manage-container").classList.remove("hidden");
+    }
+    function showUpdate() {
+      document.getElementById("manage-container").classList.add("hidden");
+      document.getElementById("update-container").classList.remove("hidden");
+    }
+    function cancelUpdate() {
+      document.getElementById("update-container").classList.add("hidden");
+      document.getElementById("manage-container").classList.remove("hidden");
+    }
+
+    // Sign Up
+    function signUp() {
+      const username = document.getElementById("new-username").value.trim();
+      const password = document.getElementById("new-password").value;
+      const error = document.getElementById("signup-error");
+
+      if (!username || !password) {
+        error.textContent = "All fields are required.";
+        return;
       }
-    })();
-
-    (function() {
-      var yearEl = document.getElementById('year');
-      yearEl.textContent = new Date().getFullYear();
-
-      fetch('data.json', { cache: 'no-store' })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          if (!data) return;
-
-          if (data.site) {
-            if (data.site.title) {
-              document.title = data.site.title;
-              document.getElementById('site-title').textContent = data.site.title;
-            }
-            if (data.site.tagline) {
-              document.getElementById('hero-tagline').textContent = data.site.tagline;
-            }
-          }
-
-          if (data.profile) {
-            if (data.profile.name) {
-              document.getElementById('profile-name').textContent = data.profile.name;
-              document.getElementById('footer-name').textContent = data.profile.name;
-            }
-            if (data.profile.avatar) {
-              var avatarEl = document.getElementById('profile-avatar');
-              avatarEl.src = data.profile.avatar;
-              avatarEl.alt = (data.profile.name ? data.profile.name + ' portrait' : 'Profile portrait');
-            }
-            if (data.profile.bio) {
-              document.getElementById('about-bio').textContent = data.profile.bio;
-            }
-          }
-
-          var skillsList = document.getElementById('skills-list');
-          if (Array.isArray(data.skills)) {
-            data.skills.forEach(function(skill, index) {
-              var li = document.createElement('li');
-              li.className = 'chip';
-              li.textContent = skill;
-              li.style.animationDelay = (index * 0.1) + 's';
-              skillsList.appendChild(li);
-            });
-          }
-
-          var projectsGrid = document.getElementById('projects-grid');
-          if (Array.isArray(data.projects)) {
-            data.projects.forEach(function(project, index) {
-              var card = document.createElement('article');
-              card.className = 'card';
-              card.style.animationDelay = (index * 0.2) + 's';
-              var html = '' +
-                '<div class="card-media">' +
-                  (project.image ? '<img src="' + project.image + '" alt="' + (project.name || 'Project') + ' image" loading="lazy">' : '') +
-                '</div>' +
-                '<div class="card-body">' +
-                  '<h3>' + (project.name || 'Project') + '</h3>' +
-                  (project.desc ? '<p>' + project.desc + '</p>' : '') +
-                  (Array.isArray(project.tags) ? '<ul class="chips small">' + project.tags.map(function(t){return '<li class="chip">' + t + '</li>';}).join('') + '</ul>' : '') +
-                  (project.link ? '<a class="btn btn-small" href="' + project.link + '" target="_blank" rel="noopener">View</a>' : '') +
-                '</div>';
-              card.innerHTML = html;
-              projectsGrid.appendChild(card);
-            });
-          }
-
-                     var galleryGrid = document.getElementById('gallery-grid');
-           if (Array.isArray(data.gallery)) {
-             data.gallery.forEach(function(src, index) {
-               var fig = document.createElement('figure');
-               fig.className = 'gallery-item';
-               fig.style.animationDelay = (index * 0.15) + 's';
-               fig.innerHTML = '<img src="' + src + '" alt="Gallery image" loading="lazy">';
-               
-               
-               fig.addEventListener('click', function() {
-                 openGalleryView(src, index, data.gallery);
-               });
-               
-               galleryGrid.appendChild(fig);
-             });
-           }
-
-                     if (data.contact) {
-             if (data.contact.email) {
-               var emailEl = document.getElementById('contact-email');
-               emailEl.textContent = data.contact.email;
-               emailEl.href = 'mailto:' + data.contact.email;
-             }
-             if (data.contact.location) {
-               document.getElementById('contact-location').textContent = data.contact.location;
-             }
-             if (data.contact.availability) {
-               document.getElementById('contact-availability').textContent = data.contact.availability;
-             }
-           }
-
-           if (data.youtube) {
-             if (data.youtube.title) {
-               document.getElementById('youtube-title').textContent = data.youtube.title;
-             }
-             if (data.youtube.description) {
-               document.getElementById('youtube-description').textContent = data.youtube.description;
-             }
-             if (data.youtube.url) {
-               document.getElementById('youtube-link').href = data.youtube.url;
-             }
-           }
-
-          var socialsList = document.getElementById('social-links');
-          if (Array.isArray(data.socials)) {
-            data.socials.forEach(function(s, index) {
-              var li = document.createElement('li');
-              li.style.animationDelay = (index * 0.1) + 's';
-              var icon = getSocialIcon(s.name);
-              li.innerHTML = '<a href="' + s.url + '" target="_blank" rel="noopener">' + icon + ' ' + s.name + '</a>';
-              socialsList.appendChild(li);
-            });
-          }
-          
-          function getSocialIcon(platform) {
-            const icons = {
-              'Instagram': '📸',
-              'Facebook': '📘',
-              'TikTok': '🎵',
-              'Twitter': '🐦',
-              'LinkedIn': '💼',
-              'GitHub': '💻',
-              'YouTube': '📺',
-              'Discord': '🎮'
-            };
-            return icons[platform] || '🔗';
-          }
-        })
-        .catch(function(err) {
-          console.warn('Failed loading data.json', err);
-        });
-    })();
-
-    (function() {
-      const particles = document.querySelector('.particles');
-      
-      document.addEventListener('mousemove', (e) => {
-        if (Math.random() > 0.85) {
-          createParticle(e.clientX, e.clientY);
-        }
-      });
-      
-      
-      setInterval(() => {
-        if (Math.random() > 0.7) {
-          const x = Math.random() * window.innerWidth;
-          const y = -50;
-          createParticle(x, y);
-        }
-      }, 300);
-
-      function createParticle(x, y) {
-        const emojis = ['✨', '💫', '⭐', '🌟', '💎', '🌸', '🌺', '🌼', '🌻', '🌷', '🌹', '🍀', '🎀', '🎈', '🎉', '🎊', '💖', '💕', '💗', '💓', '💝', '💞', '💟', '💌', '💋', '💍', '💎', '🔮', '🎭', '🎪', '🎨', '🎬', '🎤', '🎧', '🎵', '🎶', '🎹', '🎸', '🎺', '🎻', '🎷', '🎺', '🎸', '🎻', '🎷', '🎺', '🎸', '🎻', '🎷'];
-        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-        
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.textContent = randomEmoji;
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particles.appendChild(particle);
-        
-        setTimeout(() => {
-          particle.remove();
-        }, 2000);
+      if (password.length < 8) {
+        error.textContent = "Password must be at least 8 characters.";
+        return;
       }
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+      error.textContent = "";
+      alert("Sign up successful! Please log in.");
+      showLogin();
+    }
 
-      const sparkle = document.querySelector('.sparkle');
-      sparkle.addEventListener('mouseenter', () => {
-        sparkle.style.animation = 'sparkle 0.6s ease-in-out';
-      });
+    // Login
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      const error = document.getElementById("login-error");
 
-      sparkle.addEventListener('animationend', () => {
-        sparkle.style.animation = '';
-      });
+      const savedUser = localStorage.getItem("username");
+      const savedPass = localStorage.getItem("password");
 
-      const heart = document.querySelector('.heart');
-      heart.addEventListener('click', () => {
-        heart.style.animation = 'heartbeat 0.6s ease-in-out';
-      });
-
-      heart.addEventListener('animationend', () => {
-        heart.style.animation = '';
-      });
-
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll('.section-title, .chip, .card, .gallery-item, .socials li').forEach(el => {
-        observer.observe(el);
-      });
-
-      let currentTheme = 'light';
-      const body = document.body;
-      
-      function toggleTheme() {
-        currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-        body.setAttribute('data-theme', currentTheme);
-        localStorage.setItem('theme', currentTheme);
-      }
-
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        currentTheme = savedTheme;
-        body.setAttribute('data-theme', currentTheme);
-      }
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 't' && e.ctrlKey) {
-          toggleTheme();
-        }
-      });
-
-      const typingIndicator = document.querySelector('.typing-indicator');
-      let typingIndex = 0;
-      
-      function animateTyping() {
-        const dots = typingIndicator.querySelectorAll('span');
-        dots[typingIndex].classList.add('typing');
-        
-        setTimeout(() => {
-          dots[typingIndex].classList.remove('typing');
-          typingIndex = (typingIndex + 1) % dots.length;
-        }, 500);
-      }
-
-             setInterval(animateTyping, 1500);
-     })();
-     
-    
-     function openGalleryView(src, index, galleryArray) {
-       
-       const modal = document.createElement('div');
-       modal.className = 'gallery-modal';
-       modal.innerHTML = `
-         <div class="gallery-modal-content">
-           <button class="gallery-close-btn">×</button>
-           <div class="gallery-navigation">
-             <button class="gallery-nav-btn gallery-prev-btn" ${index === 0 ? 'disabled' : ''}>‹</button>
-             <button class="gallery-nav-btn gallery-next-btn" ${index === galleryArray.length - 1 ? 'disabled' : ''}>›</button>
-           </div>
-           <div class="gallery-image-container">
-             <img src="${src}" alt="Gallery image" class="gallery-modal-image">
-           </div>
-           <div class="gallery-info">
-             <span class="gallery-counter">${index + 1} of ${galleryArray.length}</span>
-           </div>
-         </div>
-       `;
-       
-       document.body.appendChild(modal);
-       
-       
-       const closeBtn = modal.querySelector('.gallery-close-btn');
-       closeBtn.addEventListener('click', () => {
-         modal.remove();
-       });
-       
-       
-       modal.addEventListener('click', (e) => {
-         if (e.target === modal) {
-           modal.remove();
-         }
-       });
-       
-
-       const prevBtn = modal.querySelector('.gallery-prev-btn');
-       const nextBtn = modal.querySelector('.gallery-nav-btn');
-       const image = modal.querySelector('.gallery-modal-image');
-       const counter = modal.querySelector('.gallery-counter');
-       
-       prevBtn.addEventListener('click', () => {
-         if (index > 0) {
-           index--;
-           image.src = galleryArray[index];
-           counter.textContent = (index + 1) + ' of ' + galleryArray.length;
-           prevBtn.disabled = index === 0;
-           nextBtn.disabled = false;
-         }
-       });
-       
-       nextBtn.addEventListener('click', () => {
-         if (index < galleryArray.length - 1) {
-           index++;
-           image.src = galleryArray[index];
-           counter.textContent = (index + 1) + ' of ' + galleryArray.length;
-           nextBtn.disabled = index === galleryArray.length - 1;
-           prevBtn.disabled = false;
-         }
-       });
-       
-
-       document.addEventListener('keydown', function handleKeydown(e) {
-         if (e.key === 'Escape') {
-           modal.remove();
-           document.removeEventListener('keydown', handleKeydown);
-         } else if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
-           prevBtn.click();
-         } else if (e.key === 'ArrowRight' && !nextBtn.disabled) {
-           nextBtn.click();
-         }
-       });
-       
-
-       setTimeout(() => modal.classList.add('show'), 10);
-     }
-   </script>
-
-
-<script src="https://www.youtube.com/iframe_api"></script>
-<script>
-  let player;
-
-
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-player', {
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
-      }
-    });
-  }
-
-  function onPlayerReady(event) {
-    const playBtn = document.querySelector('.control-btn:nth-child(1)');
-    const pauseBtn = document.querySelector('.control-btn:nth-child(2)');
-    const volumeBtn = document.querySelector('.control-icon:nth-child(3)');
-    const progressBar = document.querySelector('.progress-bar');
-    const progressFill = document.querySelector('.progress-fill');
-    const timeDisplay = document.querySelector('.time-display');
-
-
-    playBtn.addEventListener('click', () => {
-      player.playVideo();
-    });
-
-
-    pauseBtn.addEventListener('click', () => {
-      player.pauseVideo();
-    });
-
-
-    volumeBtn.addEventListener('click', () => {
-      const currentVolume = player.getVolume();
-      if (currentVolume > 0) {
-        player.setVolume(0);
-        volumeBtn.textContent = '🔇';
+      if (username === savedUser && password === savedPass) {
+        document.getElementById("login-container").classList.add("hidden");
+        document.getElementById("calculator-container").classList.remove("hidden");
       } else {
-        player.setVolume(100);
-        volumeBtn.textContent = '🔊';
+        error.textContent = "Invalid username or password.";
       }
-    });
+    }
 
-    progressBar.addEventListener('click', (e) => {
-      const barWidth = progressBar.offsetWidth;
-      const clickX = e.offsetX;
-      const duration = player.getDuration();
-      const newTime = (clickX / barWidth) * duration;
-      player.seekTo(newTime, true);
-    });
-
-
-    setInterval(() => {
-      if (player && player.getDuration) {
-        const current = player.getCurrentTime();
-        const duration = player.getDuration();
-        const percent = (current / duration) * 100;
-
-        progressFill.style.width = percent + '%';
-        timeDisplay.textContent = formatTime(current) + ' / ' + formatTime(duration);
+    // Update Password
+    function updatePassword() {
+      const newPass = document.getElementById("update-password").value;
+      const error = document.getElementById("update-error");
+      if (newPass.length < 8) {
+        error.textContent = "Password must be at least 8 characters.";
+        return;
       }
-    }, 1000);
-  }
+      localStorage.setItem("password", newPass);
+      error.textContent = "";
+      alert("Password updated!");
+      cancelUpdate();
+    }
 
-  function onPlayerStateChange(event) {
+    // Delete Account
+    function deleteAccount() {
+      if (confirm("Are you sure you want to delete your account?")) {
+        localStorage.removeItem("username");
+        localStorage.removeItem("password");
+        alert("Account deleted.");
+        logout();
+      }
+    }
 
-  }
+    // Logout
+    function logout() {
+      document.getElementById("manage-container").classList.add("hidden");
+      document.getElementById("calculator-container").classList.add("hidden");
+      showLogin();
+    }
 
-  function formatTime(sec) {
-    const minutes = Math.floor(sec / 60);
-    const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
-    return `${minutes}:${seconds}`;
-  }
-</script>
- </body>
- </html>
-
+    // Calculator Functions
+    function appendValue(val) {
+      document.getElementById("display").value += val;
+    }
+    function clearDisplay() {
+      document.getElementById("display").value = "";
+    }
+    function backspace() {
+      const display = document.getElementById("display");
+      display.value = display.value.slice(0, -1);
+    }
+    function calculate() {
+      const display = document.getElementById("display");
+      try { display.value = eval(display.value); }
+      catch (e) { display.value = "Error"; }
+    }
+  </script>
+</body>
+</html>
